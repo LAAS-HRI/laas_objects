@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="red_ball">
+<link name="red_ball">
+    <visual>
+      <geometry>
+        <mesh filename="package://laas_objects/res/3ds/red_ball.3ds"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://laas_objects/res/3ds/red_ball.3ds"/>
+      </geometry>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
+    </collision>
+    <inertial>
+      <mass value="0.075"/>
+      <inertia ixx="0.000378125" ixy="0.0" ixz="0.0" iyy="0.000378125" iyz="0.0" izz="0.000378125"/>
+    </inertial>
+</link>
+</robot>
