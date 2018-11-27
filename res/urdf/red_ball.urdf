@@ -3,13 +3,18 @@
 <link name="red_ball">
     <visual>
       <geometry>
-        <mesh filename="package://laas_objects/res/3ds/red_ball.3ds"/>
+        <mesh filename="package://laas_objects/res/obj/red_ball.obj"/>
       </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba=".8 0 0 1"/>
+      </material>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://laas_objects/res/3ds/red_ball.3ds"/>
+        <mesh filename="package://laas_objects/res/obj/red_ball.obj"/>
       </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
     <inertial>

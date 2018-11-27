@@ -3,16 +3,18 @@
 <link name="orange_cup">
     <visual>
       <geometry>
-        <box size="0.055 0.055 0.055"/>
+        <mesh filename="package://laas_objects/res/obj/orange_cup.obj"/>
       </geometry>
-      <material name="red">
-        <color rgba=".8 0 0 1"/>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <material name="orange">
+        <color rgba="1 .4 0 1"/>
       </material>
     </visual>
     <collision>
       <geometry>
-        <box size="0.055 0.055 0.055"/>
+        <mesh filename="package://laas_objects/res/obj/orange_cup.obj"/>
       </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
     <inertial>
