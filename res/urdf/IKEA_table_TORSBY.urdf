@@ -15,7 +15,8 @@
       <geometry>
       <box size="1.40 0.90 0.04"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.35"/>
+      <origin rpy="0 0 0" xyz="0 0 0.355"/>
+       <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
 
     <collision>
@@ -23,24 +24,28 @@
       <box size="0.025 0.025 0.75"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0.675 0.425 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
     <collision>
       <geometry>
       <box size="0.025 0.025 0.75"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0.675 -0.425 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
     <collision>
       <geometry>
       <box size="0.025 0.025 0.75"/>
       </geometry>
       <origin rpy="0 0 0" xyz="-0.675 0.425 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
     <collision>
       <geometry>
       <box size="0.025 0.025 0.75"/>
       </geometry>
       <origin rpy="0 0 0" xyz="-0.675 -0.425 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
     </collision>
    
     <inertial>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="yellow_cup">
+<link name="yellow_cup">
+    <visual>
+      <geometry>
+        <mesh filename="package://laas_objects/res/obj/yellow_cup.obj"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <material name="yellow">
+        <color rgba=".3 .4 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://laas_objects/res/obj/yellow_cup.obj"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
+    </collision>
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.000378125" ixy="0.0" ixz="0.0" iyy="0.000378125" iyz="0.0" izz="0.000378125"/>
+    </inertial>
+</link>
+</robot>

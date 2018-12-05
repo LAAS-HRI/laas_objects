@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="output" default="screen"/>
+  <arg name="respawn" default="false"/>
+  <arg name="start_manager" default="true"/>
+  <arg name="start_server" default="false"/>
+  <arg name="nodelet_manager" default="kinect2_nodelet_manager"/>
+  <arg name="launch-prefix" default=""/>
+
+  <arg name="debug_mode" default="false"/>
+  <arg name="input_cloud" default="/kinect2/qhd/points"/>
+
+  <arg name="blue_max" default="-89" />
+  <arg name="blue_min" default="-98" />
+
+  <arg name="red_max" default="0" />
+  <arg name="red_min" default="-6" />
+
+  <arg name="yellow_max" default="43" />
+  <arg name="yellow_min" default="38" />
+
+  <arg name="green_max" default="112" />
+  <arg name="green_min" default="96" />
+
+  <arg name="s_max" default="255" />
+  <arg name="s_min" default="20" />
+  <arg name="i_max" default="255" />
+  <arg name="i_min" default="0" />
+
+  <node name="image_view_color_filtering_yellow"
+        pkg="image_view" type="image_view"
+        if="$(arg debug_mode)">
+    <remap from="image" to="HSI_color_filter/cluster_decomposer_yellow/mask"/>
+  </node>
+
+  <node name="image_view_color_filtering_red"
+        pkg="image_view" type="image_view"
+        if="$(arg debug_mode)">
+    <remap from="image" to="HSI_color_filter/cluster_decomposer_red/mask"/>
+  </node>
+
+  <node name="rqt_reconfigure"
+        pkg="rqt_reconfigure" type="rqt_reconfigure"
+        if="$(arg debug_mode)">
+  </node>
+
+  <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+  	<arg name="FILTER_NAME_SUFFIX" value="_blue"/>
+    <arg name="INPUT" value="$(arg input_cloud)"/>
+    <arg name="h_max" value="$(arg blue_max)" />
+    <arg name="h_min" value="$(arg blue_min)" />
+    <arg name="s_max" value="$(arg s_max)" />
+    <arg name="s_min" value="$(arg s_min)" />
+    <arg name="i_max" value="$(arg i_max)" />
+    <arg name="i_min" value="$(arg i_min)" />
+  </include>
+
+  <node name="bounding_box_array_to_bounding_box_blue"
+        pkg="jsk_pcl_ros_utils"
+        type="bounding_box_array_to_bounding_box">
+    <remap from="~input" to="HSI_color_filter/boxes_blue"/>
+    <remap from="~output" to="blue_detection"/>
+    <param name="~index" value="0"/>
+  </node>
+
+  <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+  	<arg name="FILTER_NAME_SUFFIX" value="_red"/>
+    <arg name="INPUT" value="$(arg input_cloud)"/>
+    <arg name="h_max" value="$(arg red_max)" />
+    <arg name="h_min" value="$(arg red_min)" />
+    <arg name="s_max" value="186" />
+    <arg name="s_min" value="$(arg s_min)" />
+    <arg name="i_max" value="$(arg i_max)" />
+    <arg name="i_min" value="$(arg i_min)" />
+  </include>
+
+  <node name="bounding_box_array_to_bounding_box_red"
+        pkg="jsk_pcl_ros_utils"
+        type="bounding_box_array_to_bounding_box">
+    <remap from="~input" to="HSI_color_filter/boxes_red"/>
+    <remap from="~output" to="red_detection"/>
+    <param name="~index" value="0"/>
+  </node>
+
+  <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+  	<arg name="FILTER_NAME_SUFFIX" value="_yellow"/>
+    <arg name="INPUT" value="$(arg input_cloud)"/>
+    <arg name="h_max" value="$(arg yellow_max)" />
+    <arg name="h_min" value="$(arg yellow_min)" />
+    <arg name="s_max" value="$(arg s_max)" />
+    <arg name="s_min" value="160" />
+    <arg name="i_max" value="$(arg i_max)" />
+    <arg name="i_min" value="$(arg i_min)" />
+  </include>
+
+  <node name="bounding_box_array_to_bounding_box_yellow"
+        pkg="jsk_pcl_ros_utils"
+        type="bounding_box_array_to_bounding_box">
+    <remap from="~input" to="HSI_color_filter/boxes_yellow"/>
+    <remap from="~output" to="yellow_detection"/>
+    <param name="~index" value="0"/>
+  </node>
+
+  <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+  	<arg name="FILTER_NAME_SUFFIX" value="_green"/>
+    <arg name="INPUT" value="$(arg input_cloud)"/>
+    <arg name="h_max" value="$(arg green_max)" />
+    <arg name="h_min" value="$(arg green_min)" />
+    <arg name="s_max" value="$(arg s_max)" />
+    <arg name="s_min" value="$(arg s_min)" />
+    <arg name="i_max" value="$(arg i_max)" />
+    <arg name="i_min" value="$(arg i_min)" />
+  </include>
+
+  <node name="bounding_box_array_to_bounding_box_green"
+        pkg="jsk_pcl_ros_utils"
+        type="bounding_box_array_to_bounding_box">
+    <remap from="~input" to="HSI_color_filter/boxes_green"/>
+    <remap from="~output" to="green_detection"/>
+    <param name="~index" value="0"/>
+  </node>
+
+</launch>

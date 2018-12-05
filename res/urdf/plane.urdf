@@ -19,9 +19,10 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 -5"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-	 	<box size="30 30 10"/>
+	 	   <box size="200 200 0.001"/>
       </geometry>
     </collision>
   </link>
