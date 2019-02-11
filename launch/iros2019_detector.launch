@@ -10,11 +10,8 @@
   <arg name="debug_mode" default="false"/>
   <arg name="input_cloud" default="/kinect2/qhd/points"/>
 
-  <arg name="blue_max" default="-89" />
-  <arg name="blue_min" default="-98" />
-<!--
-  <arg name="red_max" default="0" />
-  <arg name="red_min" default="-6" />-->
+  <arg name="orange_max" default="7" />
+  <arg name="orange_min" default="0" />
 
   <arg name="yellow_max" default="43" />
   <arg name="yellow_min" default="38" />
@@ -23,14 +20,32 @@
   <arg name="green_min" default="96" />
 
   <arg name="s_max" default="255" />
-  <arg name="s_min" default="20" />
+  <arg name="s_min" default="0" />
   <arg name="i_max" default="255" />
   <arg name="i_min" default="0" />
+
+  <arg name="marker_size" default="4.7" />
+  <arg name="max_new_marker_error" default="0.08" />
+  <arg name="max_track_error" default="0.2" />
+
+  <arg name="cam_image_topic" default="/kinect2/qhd/image_color_rect"/>
+  <arg name="cam_info_topic" default="/kinect2/qhd/camera_info"/>
+
+  <arg name="output_frame" default="map"/>
+  <arg name="bundle_files" default="$(find laas_objects)/res/tags/blue_bin.xml $(find laas_objects)/res/tags/green_bin.xml"/>
+
+  <node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) $(arg bundle_files)" />
 
   <node name="image_view_color_filtering_yellow"
         pkg="image_view" type="image_view"
         if="$(arg debug_mode)">
     <remap from="image" to="HSI_color_filter/cluster_decomposer_yellow/mask"/>
+  </node>
+
+  <node name="image_view_color_filtering_orange"
+        pkg="image_view" type="image_view"
+        if="$(arg debug_mode)">
+    <remap from="image" to="HSI_color_filter/cluster_decomposer_orange/mask"/>
   </node>
 
   <node name="image_view_color_filtering_red"
@@ -45,42 +60,23 @@
   </node>
 
   <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
-  	<arg name="FILTER_NAME_SUFFIX" value="_blue"/>
+  	<arg name="FILTER_NAME_SUFFIX" value="_orange"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
-    <arg name="h_max" value="$(arg blue_max)" />
-    <arg name="h_min" value="$(arg blue_min)" />
-    <arg name="s_max" value="$(arg s_max)" />
-    <arg name="s_min" value="$(arg s_min)" />
-    <arg name="i_max" value="$(arg i_max)" />
-    <arg name="i_min" value="$(arg i_min)" />
+    <arg name="h_max" value="$(arg orange_max)" />
+    <arg name="h_min" value="$(arg orange_min)" />
+    <arg name="s_max" value="241" />
+    <arg name="s_min" value="95" />
+    <arg name="i_max" value="216" />
+    <arg name="i_min" value="42" />
   </include>
 
-  <node name="bounding_box_array_to_bounding_box_blue"
+  <node name="bounding_box_array_to_bounding_box_orange"
         pkg="jsk_pcl_ros_utils"
         type="bounding_box_array_to_bounding_box">
-    <remap from="~input" to="HSI_color_filter/boxes_blue"/>
-    <remap from="~output" to="blue_detection"/>
+    <remap from="~input" to="HSI_color_filter/boxes_orange"/>
+    <remap from="~output" to="orange_detection"/>
     <param name="~index" value="0"/>
   </node>
-<!--
-  <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
-  	<arg name="FILTER_NAME_SUFFIX" value="_red"/>
-    <arg name="INPUT" value="$(arg input_cloud)"/>
-    <arg name="h_max" value="$(arg red_max)" />
-    <arg name="h_min" value="$(arg red_min)" />
-    <arg name="s_max" value="186" />
-    <arg name="s_min" value="$(arg s_min)" />
-    <arg name="i_max" value="$(arg i_max)" />
-    <arg name="i_min" value="$(arg i_min)" />
-  </include>
-
-  <node name="bounding_box_array_to_bounding_box_red"
-        pkg="jsk_pcl_ros_utils"
-        type="bounding_box_array_to_bounding_box">
-    <remap from="~input" to="HSI_color_filter/boxes_red"/>
-    <remap from="~output" to="red_detection"/>
-    <param name="~index" value="0"/>
-  </node>-->
 
   <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
   	<arg name="FILTER_NAME_SUFFIX" value="_yellow"/>

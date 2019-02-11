@@ -7,37 +7,59 @@
   <arg name="nodelet_manager" default="uwds_nodelet_manager"/>
   <arg name="launch-prefix" default=""/>
 
+  <arg name="filename" default="$(find laas_objects)/res/blend/adream_empty.blend"/>
+  <arg name="scale" default="1.0"/>
   <arg name="global_frame_id" default="map"/>
+  <arg name="input_frame" default="CameraTop_optical_frame"/>
+  <arg name="ressources_folder" default="$(find laas_objects)/res"/>
+  <arg name="marker_ids" default="10 11"/>
+  <arg name="marker_names" default="green_bin blue_bin"/>
 
-    <node name="blue_cup_provider"
+  <node name="env_provider2"
         pkg="nodelet" type="nodelet"
-        args="load uwds_basic_clients/SimpleObjectProvider $(arg nodelet_manager)"
+        args="load uwds_basic_clients/EnvProvider $(arg nodelet_manager)"
+        respawn="$(arg respawn)"
         output="$(arg output)"
         launch-prefix="$(arg launch-prefix)">
-    <remap from="~input" to="/blue_detection"/>
     <rosparam subst_value="true">
-      global_frame_id: $(arg global_frame_id)
-      object_name: blue_cup
-      object_model: $(find laas_objects)/res/blend/blue_cup.blend
-      output_world: blue_cup
+      filename: $(arg filename)
+      output_world: env
+      scale: $(arg scale)
+      verbose : false
     </rosparam>
   </node>
 
-    <!--<node name="red_cup_provider"
+  <node name="ar_objects_provider"
+        pkg="nodelet" type="nodelet"
+        args="load uwds_basic_clients/ArObjectsProvider $(arg nodelet_manager)"
+        output="$(arg output)"
+        launch-prefix="$(arg launch-prefix)">
+    <rosparam subst_value="true">
+      global_frame_id: $(arg global_frame_id)
+      marker_ids: $(arg marker_ids)
+      marker_names: $(arg marker_names)
+      ressources_folder: $(arg ressources_folder)
+      output_world : ar_objects
+      input_frame: $(arg input_frame)
+      verbose : false
+    </rosparam>
+  </node>
+
+  <node name="orange_cup_provider"
         pkg="nodelet" type="nodelet"
         args="load uwds_basic_clients/SimpleObjectProvider $(arg nodelet_manager)"
         output="$(arg output)"
         launch-prefix="$(arg launch-prefix)">
-    <remap from="~input" to="/red_detection"/>
+    <remap from="~input" to="/orange_detection"/>
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
-      object_name: red_cup
-      object_model: $(find laas_objects)/res/blend/red_cup.blend
-      output_world: red_cup
+      object_name: orange_cup
+      object_model: $(find laas_objects)/res/blend/orange_cup.blend
+      output_world: orange_cup
     </rosparam>
-  </node>-->
+  </node>
 
-    <node name="yellow_cup_provider"
+  <node name="yellow_ball_provider"
         pkg="nodelet" type="nodelet"
         args="load uwds_basic_clients/SimpleObjectProvider $(arg nodelet_manager)"
         output="$(arg output)"
@@ -45,13 +67,13 @@
     <remap from="~input" to="/yellow_detection"/>
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
-      object_name: yellow_cup
-      object_model: $(find laas_objects)/res/blend/yellow_cup.blend
-      output_world: yellow_cup
+      object_name: yellow_ball
+      object_model: $(find laas_objects)/res/blend/yellow_ball.blend
+      output_world: yellow_ball
     </rosparam>
   </node>
 
-    <node name="green_cup_provider"
+  <node name="green_cylinder_provider"
         pkg="nodelet" type="nodelet"
         args="load uwds_basic_clients/SimpleObjectProvider $(arg nodelet_manager)"
         output="$(arg output)"
@@ -59,21 +81,22 @@
     <remap from="~input" to="/green_detection"/>
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
-      object_name: green_cup
-      object_model: $(find laas_objects)/res/blend/green_cup.blend
-      output_world: green_cup
+      object_name: green_cylinder
+      object_model: $(find laas_objects)/res/blend/green_cylinder.blend
+      output_world: green_cylinder
     </rosparam>
   </node>
 
-    <node name="cup_stack_merger"
+    <node name="merger"
         pkg="nodelet" type="nodelet"
         args="load uwds_basic_clients/WorldMerger $(arg nodelet_manager)"
         output="$(arg output)"
         launch-prefix="$(arg launch-prefix)">
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
-      default_inputs: env blue_cup yellow_cup green_cup ar_objects
-      output_world: cup_stack_merged
+      default_inputs: env orange_cup yellow_ball green_cylinder ar_objects
+      output_world: merged
+      verbose: false
     </rosparam>
   </node>
 

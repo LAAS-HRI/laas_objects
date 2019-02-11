@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="yellow_ball">
+<link name="yellow_ball">
+    <visual>
+      <geometry>
+        <sphere radius="0.045"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.045"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
+    </collision>
+    <inertial>
+      <mass value="0.030"/>
+      <inertia ixx="0.000378125" ixy="0.0" ixz="0.0" 
+               iyy="0.000378125" iyz="0.0"
+               izz="0.000378125"/>
+    </inertial>
+</link>
+</robot>

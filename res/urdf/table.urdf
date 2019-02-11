@@ -3,7 +3,7 @@
 <link name="IKEA_table_TORSBY">
     <visual>
       <geometry>
-        <mesh filename="package://laas_objects/res/obj/IKEA_table_TORSBY.obj"/>
+        <mesh filename="package://laas_objects/res/obj/table.obj"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <material name="black">
@@ -49,7 +49,7 @@
     </collision>
    
     <inertial>
-      <mass value="15.0"/>
+      <mass value="60.0"/>
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
 </link>
