@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="output" default="screen"/>
-  <arg name="respawn" default="false"/>
-  <arg name="start_manager" default="true"/>
+  <arg name="respawn" default="true"/>
+  <arg name="start_manager" default="false"/>
   <arg name="start_server" default="false"/>
-  <arg name="nodelet_manager" default="kinect2_nodelet_manager"/>
+  <arg name="nodelet_manager" default="kinect2"/>
   <arg name="launch-prefix" default=""/>
 
   <arg name="debug_mode" default="false"/>
@@ -60,6 +60,9 @@
   </node>
 
   <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+    <arg name="DEFAULT_NAMESPACE" value="/"/>
+    <arg name="create_manager" value="$(arg start_manager)"/>
+    <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_orange"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
     <arg name="h_max" value="$(arg orange_max)" />
@@ -73,12 +76,15 @@
   <node name="bounding_box_array_to_bounding_box_orange"
         pkg="jsk_pcl_ros_utils"
         type="bounding_box_array_to_bounding_box">
-    <remap from="~input" to="HSI_color_filter/boxes_orange"/>
+    <remap from="~input" to="boxes_orange"/>
     <remap from="~output" to="orange_detection"/>
     <param name="~index" value="0"/>
   </node>
 
   <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+    <arg name="DEFAULT_NAMESPACE" value="/"/>
+    <arg name="create_manager" value="$(arg start_manager)"/>
+    <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_yellow"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
     <arg name="h_max" value="$(arg yellow_max)" />
@@ -92,12 +98,15 @@
   <node name="bounding_box_array_to_bounding_box_yellow"
         pkg="jsk_pcl_ros_utils"
         type="bounding_box_array_to_bounding_box">
-    <remap from="~input" to="HSI_color_filter/boxes_yellow"/>
+    <remap from="~input" to="boxes_yellow"/>
     <remap from="~output" to="yellow_detection"/>
     <param name="~index" value="0"/>
   </node>
 
   <include file="$(find jsk_pcl_ros)/launch/hsi_color_filter.launch">
+    <arg name="DEFAULT_NAMESPACE" value="/"/>
+    <arg name="create_manager" value="$(arg start_manager)"/>
+    <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_green"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
     <arg name="h_max" value="$(arg green_max)" />
@@ -111,7 +120,7 @@
   <node name="bounding_box_array_to_bounding_box_green"
         pkg="jsk_pcl_ros_utils"
         type="bounding_box_array_to_bounding_box">
-    <remap from="~input" to="HSI_color_filter/boxes_green"/>
+    <remap from="~input" to="boxes_green"/>
     <remap from="~output" to="green_detection"/>
     <param name="~index" value="0"/>
   </node>
