@@ -3,7 +3,7 @@
 <link name="green_cylinder">
     <visual>
       <geometry>
-        <mesh filename="package://laas_objects/res/obj/green_cyclinder.obj"/>
+        <mesh filename="package://laas_objects/res/obj/green_cylinder.obj"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <material name="green">
@@ -12,7 +12,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://laas_objects/res/obj/green_cyclinder.obj"/>
+        <mesh filename="package://laas_objects/res/obj/green_cylinder.obj"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <contact_coefficients mu="1000.0" kp="0.00" kd="0.0"/>
