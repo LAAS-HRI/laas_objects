@@ -39,19 +39,19 @@
   <node name="image_view_color_filtering_yellow"
         pkg="image_view" type="image_view"
         if="$(arg debug_mode)">
-    <remap from="image" to="HSI_color_filter/cluster_decomposer_yellow/mask"/>
+    <remap from="image" to="/cluster_decomposer_yellow/mask"/>
   </node>
 
   <node name="image_view_color_filtering_orange"
         pkg="image_view" type="image_view"
         if="$(arg debug_mode)">
-    <remap from="image" to="HSI_color_filter/cluster_decomposer_orange/mask"/>
+    <remap from="image" to="/cluster_decomposer_orange/mask"/>
   </node>
 
   <node name="image_view_color_filtering_red"
         pkg="image_view" type="image_view"
         if="$(arg debug_mode)">
-    <remap from="image" to="HSI_color_filter/cluster_decomposer_red/mask"/>
+    <remap from="image" to="/cluster_decomposer_green/mask"/>
   </node>
 
   <node name="rqt_reconfigure"
