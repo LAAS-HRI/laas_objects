@@ -17,7 +17,7 @@
 
   <node name="env_provider2"
         pkg="nodelet" type="nodelet"
-        args="load uwds_basic_clients/EnvProvider $(arg nodelet_manager)"
+        args="load uwds/EnvProvider $(arg nodelet_manager)"
         respawn="$(arg respawn)"
         output="$(arg output)"
         launch-prefix="$(arg launch-prefix)">

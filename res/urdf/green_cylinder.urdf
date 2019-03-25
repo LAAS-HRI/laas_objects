@@ -7,7 +7,7 @@
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <material name="green">
-        <color rgba=".8 0 0 1"/>
+        <color rgba="0 .8 0 1"/>
       </material>
     </visual>
     <collision>
