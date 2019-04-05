@@ -2,13 +2,13 @@
 <launch>
   <arg name="output" default="screen"/>
   <arg name="respawn" default="true"/>
-  <arg name="start_manager" default="false"/>
+  <arg name="start_manager" default="true"/>
   <arg name="start_server" default="false"/>
-  <arg name="nodelet_manager" default="kinect2"/>
+  <arg name="nodelet_manager" default="object_perception"/>
   <arg name="launch-prefix" default=""/>
 
   <arg name="debug_mode" default="false"/>
-  <arg name="input_cloud" default="/kinect2/qhd/points"/>
+  <arg name="input_cloud" default="/head_mount_kinect2/qhd/points"/>
 
   <arg name="orange_max" default="7" />
   <arg name="orange_min" default="0" />
@@ -28,11 +28,19 @@
   <arg name="max_new_marker_error" default="0.08" />
   <arg name="max_track_error" default="0.2" />
 
-  <arg name="cam_image_topic" default="/kinect2/qhd/image_color_rect"/>
-  <arg name="cam_info_topic" default="/kinect2/qhd/camera_info"/>
+  <arg name="cam_image_topic" default="/head_mount_kinect2/qhd/image_color_rect"/>
+  <arg name="cam_info_topic" default="/head_mount_kinect2/qhd/camera_info"/>
 
   <arg name="output_frame" default="map"/>
   <arg name="bundle_files" default="$(find laas_objects)/res/tags/blue_bin.xml $(find laas_objects)/res/tags/green_bin.xml"/>
+
+  <node name="$(arg nodelet_manager)"
+        pkg="nodelet" type="nodelet"
+        args="manager"
+        respawn="$(arg respawn)"
+        output="$(arg output)"
+        launch-prefix="$(arg launch-prefix)"
+        if="$(arg start_manager)"/>
 
   <node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) $(arg bundle_files)" />
 
