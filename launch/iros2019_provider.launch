@@ -15,7 +15,7 @@
   <arg name="marker_ids" default="10 11"/>
   <arg name="marker_names" default="green_bin blue_bin"/>
 
-  <node name="env_provider2"
+  <node name="env_provider"
         pkg="nodelet" type="nodelet"
         args="load uwds/EnvProvider $(arg nodelet_manager)"
         respawn="$(arg respawn)"
@@ -23,7 +23,7 @@
         launch-prefix="$(arg launch-prefix)">
     <rosparam subst_value="true">
       filename: $(arg filename)
-      output_world: env
+      output_world: robot/env
       scale: $(arg scale)
       verbose : false
     </rosparam>
@@ -39,7 +39,7 @@
       marker_ids: $(arg marker_ids)
       marker_names: $(arg marker_names)
       ressources_folder: $(arg ressources_folder)
-      output_world : ar_objects
+      output_world : robot/ar_objects
       input_frame: $(arg input_frame)
       verbose : false
     </rosparam>
@@ -54,8 +54,9 @@
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
       object_name: orange_cup
+      object_class: Cup
       object_model: $(find laas_objects)/res/blend/orange_cup.blend
-      output_world: orange_cup
+      output_world: robot/orange_cup
     </rosparam>
   </node>
 
@@ -68,8 +69,9 @@
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
       object_name: yellow_ball
+      object_class: Toy
       object_model: $(find laas_objects)/res/blend/yellow_ball.blend
-      output_world: yellow_ball
+      output_world: robot/yellow_ball
     </rosparam>
   </node>
 
@@ -82,8 +84,9 @@
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
       object_name: green_cylinder
+      object_class: Toy
       object_model: $(find laas_objects)/res/blend/green_cylinder.blend
-      output_world: green_cylinder
+      output_world: robot/green_cylinder
     </rosparam>
   </node>
 
@@ -94,8 +97,8 @@
         launch-prefix="$(arg launch-prefix)">
     <rosparam subst_value="true">
       global_frame_id: $(arg global_frame_id)
-      default_inputs: env orange_cup yellow_ball green_cylinder ar_objects
-      output_world: merged
+      default_inputs: robot/env robot/orange_cup robot/yellow_ball robot/green_cylinder robot/ar_objects robot/gazes
+      output_world: robot/merged
       verbose: false
     </rosparam>
   </node>
