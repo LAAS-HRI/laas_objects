@@ -92,7 +92,7 @@
 
     <node name="merger"
         pkg="nodelet" type="nodelet"
-        args="load uwds_basic_clients/WorldMerger $(arg nodelet_manager)"
+        args="load uwds/WorldMerger $(arg nodelet_manager)"
         output="$(arg output)"
         launch-prefix="$(arg launch-prefix)">
     <rosparam subst_value="true">

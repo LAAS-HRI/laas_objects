@@ -10,7 +10,7 @@
   <arg name="debug_mode" default="false"/>
   <arg name="input_cloud" default="/head_mount_kinect2/qhd/points"/>
 
-  <arg name="orange_max" default="7" />
+  <arg name="orange_max" default="6" />
   <arg name="orange_min" default="0" />
 
   <arg name="yellow_max" default="43" />
@@ -21,12 +21,12 @@
 
   <arg name="s_max" default="255" />
   <arg name="s_min" default="0" />
-  <arg name="i_max" default="255" />
-  <arg name="i_min" default="0" />
+  <arg name="i_max" default="203" />
+  <arg name="i_min" default="82" />
 
   <arg name="marker_size" default="4.7" />
   <arg name="max_new_marker_error" default="0.08" />
-  <arg name="max_track_error" default="0.2" />
+  <arg name="max_track_error" default="0.1" />
 
   <arg name="cam_image_topic" default="/head_mount_kinect2/qhd/image_color_rect"/>
   <arg name="cam_info_topic" default="/head_mount_kinect2/qhd/camera_info"/>
@@ -72,12 +72,12 @@
     <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_orange"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
-    <arg name="h_max" value="$(arg orange_max)" />
-    <arg name="h_min" value="$(arg orange_min)" />
-    <arg name="s_max" value="241" />
-    <arg name="s_min" value="95" />
-    <arg name="i_max" value="216" />
-    <arg name="i_min" value="42" />
+    <arg name="h_max" value="6" />
+    <arg name="h_min" value="0" />
+    <arg name="s_max" value="195" />
+    <arg name="s_min" value="139" />
+    <arg name="i_max" value="73" />
+    <arg name="i_min" value="55" />
   </include>
 
   <node name="bounding_box_array_to_bounding_box_orange"
@@ -94,12 +94,12 @@
     <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_yellow"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
-    <arg name="h_max" value="$(arg yellow_max)" />
-    <arg name="h_min" value="$(arg yellow_min)" />
-    <arg name="s_max" value="$(arg s_max)" />
+    <arg name="h_max" value="43" />
+    <arg name="h_min" value="37" />
+    <arg name="s_max" value="233" />
     <arg name="s_min" value="160" />
-    <arg name="i_max" value="$(arg i_max)" />
-    <arg name="i_min" value="$(arg i_min)" />
+    <arg name="i_max" value="203" />
+    <arg name="i_min" value="82" />
   </include>
 
   <node name="bounding_box_array_to_bounding_box_yellow"
@@ -116,12 +116,12 @@
     <arg name="manager" value="$(arg nodelet_manager)"/>
   	<arg name="FILTER_NAME_SUFFIX" value="_green"/>
     <arg name="INPUT" value="$(arg input_cloud)"/>
-    <arg name="h_max" value="$(arg green_max)" />
-    <arg name="h_min" value="$(arg green_min)" />
-    <arg name="s_max" value="$(arg s_max)" />
-    <arg name="s_min" value="$(arg s_min)" />
-    <arg name="i_max" value="$(arg i_max)" />
-    <arg name="i_min" value="$(arg i_min)" />
+    <arg name="h_max" value="112" />
+    <arg name="h_min" value="96" />
+    <arg name="s_max" value="225" />
+    <arg name="s_min" value="49" />
+    <arg name="i_max" value="187" />
+    <arg name="i_min" value="40" />
   </include>
 
   <node name="bounding_box_array_to_bounding_box_green"
